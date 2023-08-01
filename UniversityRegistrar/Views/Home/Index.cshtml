@@ -1,11 +1,12 @@
-<!DOCTYPE html>
-<html>
+@{
+    Layout = "_Layout";
+}
 
-<head>
-</head>
 
-<body>
-    <h1>Hello</h1>
-</body>
+<h1>Hello</h1>
 
-</html>
+<div id="links">
+    <p>@Html.ActionLink("Courses", "Index", "Courses")</p>
+    <p>@Html.ActionLink("Students", "Index", "Students")</p>
+    <p>@Html.ActionLink("Departments", "Index", "Departments")</p>
+</div>
