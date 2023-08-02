@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Collections.Generic;
 
 namespace UniversityRegistrar.Models
 {
@@ -7,5 +8,6 @@ namespace UniversityRegistrar.Models
         public int DepartmentId {get; set;}
         [Column(TypeName = "varchar(255)")]
         public string DepartmentName {get; set;}
+        //public List<CourseDepartment> JoinCourseDept {get; }
     }
 }
