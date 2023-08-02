@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using UniversityRegistrar.Models;
+using System.Collections.Generic;
 
 namespace UniversityRegistrar
 {
@@ -10,6 +11,12 @@ namespace UniversityRegistrar
         public DepartmentsController(UniversityRegistrarContext db)
         {
             _db = db;
+        }
+
+        public ActionResult Index()
+        {
+            //List<Department> model = _db.Departments.ToList();
+            return View();
         }
     }
 }
