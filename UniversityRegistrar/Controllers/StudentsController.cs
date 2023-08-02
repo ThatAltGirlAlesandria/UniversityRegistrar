@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using UniversityRegistrar.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace UniversityRegistrar.Controllers
 {
@@ -24,13 +25,23 @@ namespace UniversityRegistrar.Controllers
         }
 
         [HttpGet("/Students/New")]
-        public ActionResult Create() {
-            return View();
+        public ActionResult New() {
+            return View("Create");
+        }
+
+        [HttpPost("/Students/New")]
+        public ActionResult Create(Student student)
+        {
+            _db.Students.Add(student);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         [HttpGet("/Students/{id}")]
         public ActionResult Details(int id) {
-            return View();
+            Student model = _db.Students
+                .FirstOrDefault(student => student.StudentId == id);
+            return View(model);
         }
 
         [HttpGet("/Students/Edit/{id}")]

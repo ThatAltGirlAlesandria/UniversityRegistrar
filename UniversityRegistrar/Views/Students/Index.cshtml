@@ -4,10 +4,12 @@
 
 
 <h1 class="sub-page-headers">Students</h1>
+<h4><a href='/students/new'>Create a new student profile</a></h4>
+<br>
 
 @using UniversityRegistrar.Models
 
 @foreach (Student student in @Model)
 {
-    <p>@Html.ActionLink("Student Details", "Details", "Students", new {id = student.StudentId})</p>
+    <p>@Html.ActionLink(student.StudentName, "Details", "Students", new {id = student.StudentId})</p>
 }
