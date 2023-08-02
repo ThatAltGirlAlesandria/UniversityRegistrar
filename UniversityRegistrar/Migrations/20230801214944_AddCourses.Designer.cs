@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UniversityRegistrar.Models;
 
@@ -10,9 +11,10 @@ using UniversityRegistrar.Models;
 namespace UniversityRegistrar.Migrations
 {
     [DbContext(typeof(UniversityRegistrarContext))]
-    partial class UniversityRegistrarContextModelSnapshot : ModelSnapshot
+    [Migration("20230801214944_AddCourses")]
+    partial class AddCourses
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,12 +28,9 @@ namespace UniversityRegistrar.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("CourseName")
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("longtext");
 
                     b.HasKey("CourseId");
-
-                    b.HasIndex("CourseName")
-                        .IsUnique();
 
                     b.ToTable("Courses");
                 });
