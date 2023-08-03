@@ -1,0 +1,15 @@
+@{
+    Layout = "_Layout";
+}
+
+@using UniversityRegistrar.Models
+@model UniversityRegistrar.Models.Course
+
+<p>Are you sure you want to delete this course? Once action is completed it cannot be undone.</p>
+
+@Html.DisplayNameFor(model => model.CourseName) @Html.DisplayFor(model => model.CourseName)
+<br>
+@using (Html.BeginForm())
+{
+    <input type="submit" value="Delete" />
+}

@@ -16,20 +16,21 @@ namespace UniversityRegistrar.Controllers
         {
             _db = db;
         }
-    
-        [HttpGet("/Students")]
+
+        [HttpGet]
         public ActionResult Index()
         {
-            List<Student> model = _db.Students.ToList();
-            return View(model);
+            List<Student> arg = _db.Students.ToList();
+            return View(arg);
         }
 
-        [HttpGet("/Students/New")]
-        public ActionResult New() {
+        [HttpGet]
+        public ActionResult New()
+        {
             return View("Create");
         }
 
-        [HttpPost("/Students/New")]
+        [HttpPost]
         public ActionResult Create(Student student)
         {
             _db.Students.Add(student);
@@ -37,16 +38,42 @@ namespace UniversityRegistrar.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpGet("/Students/{id}")]
-        public ActionResult Details(int id) {
-            Student model = _db.Students
+        [HttpGet]
+        public ActionResult Details(int id)
+        {
+            Student arg = _db.Students
                 .FirstOrDefault(student => student.StudentId == id);
-            return View(model);
+            return View(arg);
         }
 
-        [HttpGet("/Students/Edit/{id}")]
-        public ActionResult Edit() {
+        [HttpPost]
+        public ActionResult Update(int id)
+        {
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
             return View();
+        }
+
+        [HttpGet]
+        public ActionResult Delete(int id)
+        {
+            Student arg = _db.Students
+                .FirstOrDefault(student => student.StudentId == id);
+            return View(arg);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public ActionResult Destroy(int id)
+        {
+            Student thisStudent = _db.Students.FirstOrDefault(student => student.StudentId == id);
+            _db.Students.Remove(thisStudent);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }

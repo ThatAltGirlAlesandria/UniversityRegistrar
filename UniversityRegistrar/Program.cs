@@ -19,7 +19,7 @@ namespace UniversityRegistrar
                     ServerVersion.AutoDetect(builder.Configuration["ConnectionStrings:DefaultConnection"])));
 
             WebApplication app = builder.Build();
-
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
 

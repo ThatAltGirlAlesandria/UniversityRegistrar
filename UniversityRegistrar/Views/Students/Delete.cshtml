@@ -3,13 +3,13 @@
 }
 
 @model UniversityRegistrar.Models.Student
+@using UniversityRegistrar.Models
 
 <p>Are you sure you want to delete this student? Once action is completed it cannot be undone.</p>
 
-@Html.DisplayNameFor(model => model.StudentName): @Html.DisplayFor(model => model.StudentName)
+@Html.DisplayNameFor(model => model.StudentName) @Html.DisplayFor(model => model.StudentName)
+<br>
 @using (Html.BeginForm())
 {
     <input type="submit" value="Delete" />
 }
-
-@Html.ActionLink("List of students", "Index")
