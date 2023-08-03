@@ -41,9 +41,11 @@ namespace UniversityRegistrar.Controllers
         [HttpGet]
         public ActionResult Details(int id)
         {
-            Student arg = _db.Students
+            Student student = _db.Students
+                .Include(student => student.JoinEntities)
+                .ThenInclude(join => join.Course)
                 .FirstOrDefault(student => student.StudentId == id);
-            return View(arg);
+            return View(student);
         }
 
         [HttpPost]
@@ -82,6 +84,21 @@ namespace UniversityRegistrar.Controllers
             Student thisStudent = _db.Students.FirstOrDefault(student => student.StudentId == id);
             ViewBag.CourseId = new SelectList(_db.Courses, "CourseId", "CourseName");
             return View(thisStudent);
+        }
+
+        [HttpPost]
+        public ActionResult AddCourse(Student student, int courseId)
+        {
+#nullable enable
+            StudentCourse? joinEntity = _db.StudentCourses.FirstOrDefault(join =>
+                (join.StudentId == student.StudentId && join.CourseId == courseId));
+#nullable disable
+            if (joinEntity == null && student.StudentId != 0)
+            {
+                _db.StudentCourses.Add(new StudentCourse() { StudentId = student.StudentId, CourseId = courseId });
+                _db.SaveChanges();
+            }
+            return RedirectToAction("Details", new { id = student.StudentId });
         }
     }
 }
