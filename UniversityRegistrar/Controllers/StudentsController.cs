@@ -20,8 +20,8 @@ namespace UniversityRegistrar.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            List<Student> arg = _db.Students.ToList();
-            return View(arg);
+            List<Student> students = _db.Students.ToList();
+            return View(students);
         }
 
         [HttpGet]
@@ -74,6 +74,14 @@ namespace UniversityRegistrar.Controllers
             _db.Students.Remove(thisStudent);
             _db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public ActionResult AddCourse(int id)
+        {
+            Student thisStudent = _db.Students.FirstOrDefault(student => student.StudentId == id);
+            ViewBag.CourseId = new SelectList(_db.Courses, "CourseId", "CourseName");
+            return View(thisStudent);
         }
     }
 }

@@ -9,9 +9,10 @@ namespace UniversityRegistrar.Models
     public class Course
     {
         public int CourseId { get; set; }
+        [Display(Name = "Course Name: ")]
         [Column(TypeName = "varchar(255)")]
         public string CourseName { get; set; }
-        public List<StudentCourse> JoinStudentCourse {get;}
+        public List<StudentCourse> JoinStudentCourse { get; }
         //public List<CourseDepartment> JoinCourseDept {get; }
     }
 }

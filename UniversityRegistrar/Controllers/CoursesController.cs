@@ -28,6 +28,7 @@ namespace UniversityRegistrar.Controllers
             return View("Create");
         }
 
+        //("/courses/new")
         [HttpPost]
         public ActionResult Create(Course course)
         {
@@ -39,9 +40,38 @@ namespace UniversityRegistrar.Controllers
         [HttpGet]
         public ActionResult Details(int id)
         {
-            Course thisCourse = _db.Courses
+            Course course = _db.Courses
                 .FirstOrDefault(course => course.CourseId == id);
-            return View(thisCourse);
+            return View(course);
+        }
+        [HttpPost]
+        public ActionResult Update(int id)
+        {
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult Delete(int id)
+        {
+            Course arg = _db.Courses
+                .FirstOrDefault(course => course.CourseId == id);
+            return View(arg);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public ActionResult Destroy(int id)
+        {
+            Course course = _db.Courses.FirstOrDefault(course => course.CourseId == id);
+            _db.Courses.Remove(course);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }

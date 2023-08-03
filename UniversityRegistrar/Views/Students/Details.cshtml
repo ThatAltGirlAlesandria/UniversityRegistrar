@@ -11,4 +11,19 @@
 
 <p>@Html.ActionLink("Delete Student", "Delete", "Students", new {id = Model.StudentId})</p>
 <p>@Html.ActionLink("Edit Student", "Edit", "Students", new {id = Model.StudentId})</p>
+<!-- <p>@Html.ActionLink("Add Course", "AddCourse", "Students", new {id = Model.StudentId})</p> -->
 
+@if (@Model.JoinStudentCourse.Count == 0)
+{
+    <p>This item does not have any tags yet!</p>
+}
+else
+{
+    <h4>This item has the following tags:</h4>
+    <ul>
+        @foreach (StudentCourse join in Model.JoinStudentCourse)
+        {
+            <li>Tag: @join.Course.CourseName</li>
+        }
+    </ul>
+}
