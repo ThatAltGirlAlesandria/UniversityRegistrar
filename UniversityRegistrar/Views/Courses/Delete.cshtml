@@ -9,7 +9,7 @@
 
 @Html.DisplayNameFor(model => model.CourseName) @Html.DisplayFor(model => model.CourseName)
 <br>
-@using (Html.BeginForm())
+@using (Html.BeginForm("Destroy"))
 {
     <input type="submit" value="Delete" />
 }

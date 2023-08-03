@@ -67,7 +67,7 @@ namespace UniversityRegistrar.Controllers
             return View(arg);
         }
 
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
         public ActionResult Destroy(int id)
         {
             Student thisStudent = _db.Students.FirstOrDefault(student => student.StudentId == id);
